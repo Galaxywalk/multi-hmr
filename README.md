@@ -23,7 +23,8 @@
   <p align="center">
   <a href="https://arxiv.org/abs/2402.14654"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2402.14654-00ff00.svg"></a>
   <a href="https://europe.naverlabs.com/?p=9361171&preview=true"><img alt="Blogpost" src="https://img.shields.io/badge/Blogpost-up-yellow"></a>
-  <a href="https://multihmr-demo.europe.naverlabs.com/"><img alt="Demo" src="https://img.shields.io/badge/Demo-up-blue"></a>
+  <a href="https://huggingface.co/spaces/naver/multi-hmr"><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Space-blue'></a>
+<!--   <a href="https://multihmr-demo.europe.naverlabs.com/"><img alt="Demo" src="https://img.shields.io/badge/Demo-up-blue"></a> -->
   <!-- <a href="./"><img alt="Hugging Face Spaces" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue"></a> -->
   </p>
 
@@ -97,14 +98,13 @@ Here is a list of their associated features.
 Once downloaded you need to place them into `$HOME/models/multiHMR`.
 
 | modelname                     | training data                     | backbone | resolution | runtime (ms) | PVE-3PDW-test | PVE-EHF | PVE-BEDLAM-val | comment |
-|-------------------------------|-----------------------------------|----------|------------|--------------|----------|---------|---------|---------|
-| [multiHMR_896_L](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_896_L.pt)    | BEDLAM+AGORA+CUFFS+UBody                      | ViT-L    | 896x896    |    126      | 89.9  | 42.2 | 56.7 | initial ckpt |
-| [multiHMR_672_L](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_L.pt)    | BEDLAM+AGORA+CUFFS+UBody                      | ViT-L    | 672x672    |     74      | 94.1  | 37.0 | 58.6 | longer training |
-| [multiHMR_672_B](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_B.pt)    | BEDLAM+AGORA+CUFFS+UBody                      | ViT-B    | 672x672    |     43      | 94.0  | 43.6 | 67.2 | longer training |
-| [multiHMR_672_S](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_S.pt)    | BEDLAM+AGORA+CUFFS+UBody                      | ViT-S    | 672x672    |     29      | 102.4 | 49.3 | 78.9 | longer training |
-<!-- | [multiHMR_896_L_universal](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/)    | BEDLAM+AGORA+CUFFS+UBody                      | ViT-L    | 896x896    |    126       | 88.2 | 39.4 | 57.9 | longer training | -->
-<!-- | [multiHMR_1288_L_bedlam](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/)    | BEDLAM(train+val)                      | ViT-L    | 1288x1288    |    ?       | ? | ? | ckpt used for BEDLAM leaderboard | -->
-<!-- | [multiHMR_1288_L_agora](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/)    | BEDLAM(train+val)+AGORA(train+val)                      | ViT-L    | 1288x1288    |    ?       | ? | ? | ckpt used for AGORA leaderboard | -->
+|------------------------------------------|---------------------------|----------|------------|--------------|----------|---------|---------|---------|
+| [multiHMR_896_L](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_896_L.pt)  [HuggingFace model](https://huggingface.co/naver/multiHMR_896_L) | BEDLAM+AGORA+CUFFS+UBody                      | ViT-L    | 896x896    |    126      | 89.9  | 42.2 | 56.7 | initial ckpt |
+| [multiHMR_672_L](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_L.pt)   |BEDLAM+AGORA+CUFFS+UBody                      | ViT-L    | 672x672    |     74      | 94.1  | 37.0 | 58.6 | longer training |
+| [multiHMR_672_B](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_B.pt)   |BEDLAM+AGORA+CUFFS+UBody                      | ViT-B    | 672x672    |     43      | 94.0  | 43.6 | 67.2 | longer training |
+| [multiHMR_672_S](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_672_S.pt)    |BEDLAM+AGORA+CUFFS+UBody                      | ViT-S    | 672x672    |     29      | 102.4 | 49.3 | 78.9 | longer training |
+| [multiHMR_1288_L_bedlam](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_1288_L_bedlam.pt)     |BEDLAM(train+val)                      | ViT-L    | 1288x1288    |    ?       | ? | ? | ckpt used for BEDLAM leaderboard |
+| [multiHMR_1288_L_agora](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/multiHMR_1288_L_agora.pt)     | BEDLAM(train+val)+AGORA(train+val)                      | ViT-L    | 1288x1288    |    ?       | ? | ? | ckpt used for AGORA leaderboard |
 
 We compute the runtime on GPU V100-32GB.
 
@@ -229,6 +229,10 @@ CUDA_VISIBLE_DEVICES=0 python3.9 train.py \
 --pretrained models/multiHMR/multiHMR_896_L.pt
 ```
 Either check the log or open the tensorboard for checking the results.
+
+### CUFFS dataset
+The Close-Up Frames of Full-Body Subjects dataset, containing humans close to the camera with diverse hand poses is available [here](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/CUFFS/)([LICENSE](https://download.europe.naverlabs.com/ComputerVision/MultiHMR/CUFFS/CUFFS_Dataset_LICENSE.txt)).
+More information about how to use it will be given soon, stay tuned.
 
 ## License
 The code is distributed under the CC BY-NC-SA 4.0 License.\
