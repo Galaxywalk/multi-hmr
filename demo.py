@@ -247,16 +247,19 @@ if __name__ == "__main__":
             # Saving mesh
             if args.save_mesh:
                 # npy file
-                l_mesh = [hum['v3d'].cpu().numpy() for hum in humans]
+                l_mesh = np.array([hum['v3d'].cpu().numpy() for hum in humans])
+                print(f"l_mesh shape: {l_mesh.shape}")
+                camera = K.cpu().numpy()
                 mesh_fn = save_fn+'.npy'
-                np.save(mesh_fn, np.asarray(l_mesh), allow_pickle=True)
-                x = np.load(mesh_fn, allow_pickle=True)
+                store_info = {'l_mesh': l_mesh, 'camera': camera}
+                np.save(mesh_fn, store_info, allow_pickle=True)
+                
 
                 # glb file
-                l_mesh = [humans[j]['v3d'].detach().cpu().numpy() for j in range(len(humans))]
-                l_face = [model.smpl_layer['neutral_10'].bm_x.faces for j in range(len(humans))]
-                scene = create_scene(img_pil_visu, l_mesh, l_face, color=None, metallicFactor=0., roughnessFactor=0.5)
-                scene_fn = save_fn+'.glb'
-                scene.export(scene_fn)
+                # l_mesh = [humans[j]['v3d'].detach().cpu().numpy() for j in range(len(humans))]
+                # l_face = [model.smpl_layer['neutral_10'].bm_x.faces for j in range(len(humans))]
+                # scene = create_scene(img_pil_visu, l_mesh, l_face, color=None, metallicFactor=0., roughnessFactor=0.5)
+                # scene_fn = save_fn+'.glb'
+                # scene.export(scene_fn)
 
         print('end')
